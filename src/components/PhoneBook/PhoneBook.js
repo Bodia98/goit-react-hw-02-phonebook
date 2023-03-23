@@ -37,9 +37,9 @@ export class PhoneBook extends React.Component {
   };
 
   addNewContact = (contactName, contactNumber) => {
-    this.setState({
+    this.setState(prevState => ({
       contacts: [
-        ...this.state.contacts,
+        ...prevState.contacts,
         ...[
           {
             name: contactName,
@@ -48,7 +48,7 @@ export class PhoneBook extends React.Component {
           },
         ],
       ],
-    });
+    }));
   };
 
   createArrayOfContacts = () => {
