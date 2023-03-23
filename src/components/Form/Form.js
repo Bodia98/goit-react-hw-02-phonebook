@@ -6,20 +6,8 @@ export class FormContainer extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.checkNameInList(this.props.contacts);
-  };
-
-  handleNameChange = e => {
-    this.setState({ name: e.currentTarget.value });
-  };
-
-  handleNumberChange = e => {
-    this.setState({ number: e.currentTarget.value });
-  };
-
-  checkNameInList = contacts => {
     if (
-      contacts.find(
+      this.props.contacts.find(
         contact => contact.name.toLowerCase() === this.state.name.toLowerCase()
       )
     ) {
@@ -33,6 +21,10 @@ export class FormContainer extends React.Component {
     });
   };
 
+  handleChange = e => { 
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
+  };
+
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -41,7 +33,7 @@ export class FormContainer extends React.Component {
           <FormBookInput
             type="text"
             value={this.state.name}
-            onChange={this.handleNameChange}
+            onChange={this.handleChange}
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -53,7 +45,7 @@ export class FormContainer extends React.Component {
           <FormBookInput
             type="tel"
             value={this.state.number}
-            onChange={this.handleNumberChange}
+            onChange={this.handleChange}
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

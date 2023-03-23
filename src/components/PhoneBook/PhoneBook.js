@@ -29,11 +29,11 @@ export class PhoneBook extends React.Component {
   };
 
   handleClickDeleteBtn = e => {
-    this.setState({
-      contacts: this.state.contacts.filter(
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(
         contact => contact.id !== e.target.id
       ),
-    });
+    }));
   };
 
   addNewContact = (contactName, contactNumber) => {
@@ -53,7 +53,7 @@ export class PhoneBook extends React.Component {
 
   createArrayOfContacts = () => {
     if (this.state.filter !== '') {
-      return this.onFilterArray(this.state.contacts).map(contact => contact);
+      return this.onFilterArray(this.state.contacts);
     }
     return this.state.contacts;
   };
